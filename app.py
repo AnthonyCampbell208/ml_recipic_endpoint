@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 from flask import Flask, jsonify, request
 import pickle
@@ -5,23 +6,22 @@ import pickle
 
 # load model
 
-recipic_model = pickle.load(open('model.pkl','rb'))
+# recipic_model = pickle.load(open('model.pkl','rb'))
 
 # app
 app = Flask(__name__)
 
 # routes
 @app.route('/', methods=['POST'])
-
 def predict():
     # get data
     data = request.get_json(force=True)
-    print(type(recipic_model))
-    print(data)
-    results = recipic_model(data, size=416)
-    print(results)
+    # print(type(recipic_model))
+    # print(data)
+    # results = recipic_model(data, size=416)
+    # print(results)
     # convert data into dataframe
-    return data['file']
+    return jsonify(data)
 
     # predictions
     result = model.predict(data_df)
