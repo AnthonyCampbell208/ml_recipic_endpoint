@@ -2,11 +2,12 @@ import json
 import pandas as pd
 from flask import Flask, jsonify, request
 import pickle
-import torch
 
 # load model
 
-model = torch.hub.load("ultralytics/yolov5", "custom", path = 'best.pt', force_reload=True)
+# model = torch.hub.load("ultralytics/yolov5", "custom", path = 'best.pt', force_reload=True)
+
+model = pickle.load(open('model.pkl','rb'))
 
 # app
 app = Flask(__name__)
