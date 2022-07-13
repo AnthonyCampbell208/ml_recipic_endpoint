@@ -1,11 +1,11 @@
 import pandas as pd
 from flask import Flask, jsonify, request
 import pickle
-import torch
 
 # load model
 # model = pickle.load(open('model.pkl','rb'))
-model = torch.hub.load("ultralytics/yolov5", "custom", path = 'best.pt', force_reload=True)
+filehandler = open('model.pkl', 'r') 
+model = pickle.load(filehandler)
 
 # app
 app = Flask(__name__)
@@ -16,7 +16,7 @@ app = Flask(__name__)
 def predict():
     # get data
     data = request.get_json(force=True)
-
+        
     # convert data into dataframe
     data.update((x, [y]) for x, y in data.items())
     data_df = pd.DataFrame.from_dict(data)
